@@ -3,6 +3,7 @@ const express = require("express")
 const mongoose = require('mongoose');
 const app = express();
 const User = require("./models/user");
+const usersSubscribed = require("./models/userSubscribed");
 const multer = require("multer");
 const path = require("path");
 const Exercise = require("./models/exercise");
@@ -45,6 +46,9 @@ app.use(express.urlencoded({
 // r plan
 const PlanRouter = require('./routes/plan');
 app.use('/', PlanRouter);
+
+const predefinedPlanRouter = require('./routes/predefinedPlan');
+app.use('/', predefinedPlanRouter);
 //r cp
 const completedPlanRouter = require('./routes/completedPlan');
 app.use('/', completedPlanRouter);
@@ -60,6 +64,9 @@ app.use('/', exerciseRouter);
 //friend
 const friendPlanRouter = require('./routes/friendPlan');
 app.use('/', friendPlanRouter);
+
+const userSubscribedRouter = require('./routes/userSubscribed');
+app.use('/', userSubscribedRouter);
 
 //nidhal
 var indexRouter = require('./routes/index');

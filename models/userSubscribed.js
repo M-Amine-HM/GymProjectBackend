@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 
 let dataSchema = new mongoose.Schema({
 
-    'name': {
+    'email': {
         required: true,
         type: String
     },
-    'email': {
+    'userId': {
         required: true,
         type: String
     },
@@ -16,10 +16,7 @@ let dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    'sexe': {
-        required: true,
-        type: String
-    },
+
     'subscription': {
         required: true,
         type: String
@@ -28,21 +25,18 @@ let dataSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    'phoneNumber': {
+    'entries': {
         required: false,
-        type: String
+        type: [String]
     },
-    'adress': {
+    'exits': {
         required: false,
-        type: String
-    }, 'image': {
-        required: false,
-        type: String
-    }
+        type: [String]
+    },
 
 
 
 
 })
 // module.exports=mongoose.model("nomd de collection",dataSchema)                         
-module.exports = mongoose.model("usersSubscribed", dataSchema);
+module.exports = mongoose.model("usersSubscribedDetails", dataSchema);

@@ -280,11 +280,34 @@ app.use(errHandler);
 // app.post("/api/addCompletedPlanNormal", )
 
 // app.get("/api/getCompletedplans", )
-
-
 const ipAdress = "192.168.81.218";
 
-app.listen(2000, () => {
+const server = app.listen(2000, () => {
 
     console.log("connected on port 2000")
 })
+
+
+const io = require('socket.io')(server, {
+    pingInterval: 25000, // Interval in ms to send a ping packet to the client
+    pingTimeout: 60000,  // Time in ms to wait for a ping response before closing the connection
+    cors: {
+        origin: "*", // Allow all origins, adjust as needed
+        methods: ["GET", "POST"]
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log('Connected successfully', socket.id);
+
+    socket.on('disconnect', (reason) => {
+        console.log('Disconnected', socket.id, 'Reason:', reason);
+    });
+
+    socket.on('message', (data) => {
+        console.log('Message received:', data);
+        socket.broadcast.emit('message-receive', data);
+    });
+});
+
+

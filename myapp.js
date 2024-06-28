@@ -173,7 +173,57 @@ function errHandler(err, req, res, next) {
 app.use(errHandler);
 
 
+app.get("/api/getverficationcode/:attribute", async (req, res) => {
 
+    try {
+        //const query = {};
+        //query["bodyPart"] = req.params.attribute;
+        var theEmail = req.params.attribute;
+        function generateRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        const verificationCode = generateRandomNumber(1000, 9999);
+        var nodemailer = require('nodemailer');
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'nidhaaal.2000@gmail.com',
+                pass: 'ldmk qbsv suhx gshj'
+            }
+        });
+
+        var mailOptions = {
+            from: 'nidhaaal.2000@gmail.com',
+            to: theEmail,
+            subject: 'Code de vérification du GYM APP ',
+
+            text: `Votre code de vérification est : ${verificationCode}`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+        res.status(200).json(
+            {
+
+                "code": verificationCode
+            }
+
+
+        );
+
+    } catch (error) {
+        res.status(500).json(error.message);
+
+    }
+
+
+},)
 
 //post for user 
 // app.post("/api/add_user", )

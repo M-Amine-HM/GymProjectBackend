@@ -188,13 +188,13 @@ app.get("/api/getverficationcode/:attribute", async (req, res) => {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'nidhaaal.2000@gmail.com',
-                pass: 'ldmk qbsv suhx gshj'
+                user: 'aminos5110@gmail.com',
+                pass: 'tsvi ubli ivki enbw'
             }
         });
 
         var mailOptions = {
-            from: 'nidhaaal.2000@gmail.com',
+            from: 'aminos5110@gmail.com',
             to: theEmail,
             subject: 'Code de vérification du GYM APP ',
 
